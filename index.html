@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Replica Watch Dashboard</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: Arial, sans-serif;
+  background: #f3f6fb; color: #182338;
+}
+header {
+  background: #172554; color: white;
+  padding: 24px 30px;
+}
+header h1 { margin: 0 0 8px; }
+header p { margin: 0; color: #cbd5e1; }
+main { padding: 25px; max-width: 1200px; margin: auto; }
+.cards {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.card, .panel {
+  background: white; padding: 20px; border-radius: 12px;
+  box-shadow: 0 2px 10px #1823380b;
+}
+.card p { color: #64748b; margin: 0; }
+.card h2 { font-size: 30px; margin: 12px 0 5px; }
+.panel { margin-top: 22px; overflow-x: auto; }
+.status {
+  display: inline-block; padding: 6px 10px;
+  border-radius: 20px; font-size: 13px;
+}
+.green { background: #dcfce7; color: #166534; }
+.yellow { background: #fef3c7; color: #92400e; }
+.gray { background: #e2e8f0; color: #334155; }
+table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+th, td {
+  padding: 14px; text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+th { color: #64748b; font-size: 13px; }
+button {
+  padding: 11px 16px; border: 0; border-radius: 7px;
+  background: #2563eb; color: white; cursor: pointer;
+}
+button:hover { background: #1d4ed8; }
+.note { color: #64748b; font-size: 13px; }
+@media(max-width: 750px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  main { padding: 14px; }
+}
+@media(max-width: 420px) {
+  .cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Replica Watch</h1>
+  <p>Database Replication Monitoring Dashboard</p>
+</header>
+
+<main>
+  <p><span class="status yellow">DEMO MODE</span>
+     &nbsp; Live replication is not configured yet.</p>
+
+  <section class="cards">
+    <div class="card">
+      <p>Total Nodes</p>
+      <h2 id="nodes">50,000</h2>
+      <span class="note">Project database</span>
+    </div>
+    <div class="card">
+      <p>Replication Logs</p>
+      <h2 id="logs">50,006</h2>
+      <span class="note">Recorded log rows</span>
+    </div>
+    <div class="card">
+      <p>Failover Events</p>
+      <h2 id="events">50,000</h2>
+      <span class="note">Recorded event rows</span>
+    </div>
+    <div class="card">
+      <p>Replication Lag</p>
+      <h2>—</h2>
+      <span class="note">Waiting for live replicas</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Database Nodes</h2>
+    <table>
+      <thead>
+        <tr><th>Database</th><th>Role</th>
+            <th>Status</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>PostgreSQL</td><td>Primary</td>
+          <td><span class="status green">Configured</span></td>
+          <td>Existing primary setup</td></tr>
+        <tr><td>PostgreSQL</td><td>Standby 1</td>
+          <td><span class="status yellow">Pending</span></td>
+          <td>Replication setup required</td></tr>
+        <tr><td>MongoDB</td><td>Replica Set</td>
+          <td><span class="status gray">Pending</span></td>
+          <td>Replica members not configured</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Node statuses are setup indicators, not live health checks.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Dashboard Controls</h2>
+    <p>Refresh the sample dashboard values for a demonstration.</p>
+    <button onclick="refreshDemo()">Refresh Demo</button>
+    <p id="message" class="note">Dashboard loaded successfully.</p>
+  </section>
+</main>
+
+<script>
+function refreshDemo() {
+  document.getElementById("nodes").textContent = "50,000";
+  document.getElementById("logs").textContent = "50,006";
+  document.getElementById("events").textContent = "50,000";
+  document.getElementById("message").textContent =
+    "Demo values refreshed. Live database connection is not enabled.";
+}
+</script>
+</body>
+</html>
